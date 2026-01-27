@@ -164,7 +164,7 @@ header {
   }
 }
 
-/* Chat-Button fixiert unten rechts */
+/* 💬 Chat Button */
   #chatBtn {
     position: fixed;
     bottom: 20px;
@@ -178,83 +178,71 @@ header {
     line-height: 60px;
     font-size: 28px;
     cursor: pointer;
-    z-index: 9999;
+    z-index: 99999;
     box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    transition: transform 0.2s;
   }
-  #chatBtn:hover { transform: scale(1.1); }
 
-  /* Chatbox */
+  /* 💬 Chatbox */
   #chatBox {
     position: fixed;
     bottom: 90px;
     right: 20px;
-    width: 350px;
-    height: 450px;
-    background: #fff;
+    width: 300px;
+    height: 360px; /* KLEINER */
+    background: white;
     border-radius: 12px;
     box-shadow: 0 6px 15px rgba(0,0,0,0.3);
     display: none;
     flex-direction: column;
-    z-index: 9999;
+    z-index: 99999;
   }
 
+  /* Header */
   #chatHeader {
     background: #2c7be5;
     color: white;
-    padding: 12px;
+    padding: 10px;
     font-weight: bold;
     display: flex;
     justify-content: space-between;
+    align-items: center;
   }
 
-  #closeBtn { cursor: pointer; }
+  /* ❌ Close Button */
+  #closeBtn {
+    cursor: pointer;
+    font-size: 18px;
+    padding: 4px 8px;
+    border-radius: 6px;
+    background: rgba(255,255,255,0.2);
+  }
 
   #messages {
     flex: 1;
     padding: 10px;
     overflow-y: auto;
-    scroll-behavior: smooth;
+    font-size: 14px;
   }
 
-  /* Kategorie-Buttons */
+  /* Buttons */
   #chatButtons {
     display: flex;
     flex-wrap: wrap;
-    gap: 5px;
-    padding: 5px 10px;
-    justify-content: space-between;
+    gap: 6px;
+    padding: 10px;
+    border-top: 1px solid #ddd;
   }
-  #chatButtons button.chatCat {
+
+  .chatCat {
     flex: 1 1 48%;
-    padding: 6px;
+    padding: 8px;
     background: #2c7be5;
     color: white;
     border: none;
     border-radius: 6px;
     cursor: pointer;
     font-size: 14px;
-    transition: transform 0.2s, opacity 0.2s;
-  }
-  #chatButtons button.chatCat:hover { transform: scale(1.05); opacity: 0.9; }
-
-  /* Eingabebereich */
-  #inputArea {
-    display: flex;
-    border-top: 1px solid #ccc;
-  }
-  #msgInput {
-    flex: 1;
-    padding: 10px;
-    border: none;
-  }
-  #sendBtn {
-    padding: 10px 15px;
-    border: none;
-    background: #2c7be5;
-    color: white;
-    cursor: pointer;
   }
 
-  .user { text-align: right; color: #2c7be5; margin: 5px 0; }
-  .bot { text-align: left; color: #333; margin: 5px 0; }
+  .user { text-align: right; color: #2c7be5; margin: 6px 0; }
+  .bot { text-align: left; color: #333; margin: 6px 0; }

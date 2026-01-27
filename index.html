@@ -13,17 +13,14 @@
                     document.getElementById("menu").classList.toggle("show");
                     }
 
-                    window.addEventListener("DOMContentLoaded", function() {
+                    window.addEventListener("DOMContentLoaded", () => {
                     const chatBtn = document.getElementById("chatBtn");
                     const chatBox = document.getElementById("chatBox");
                     const closeBtn = document.getElementById("closeBtn");
                     const messages = document.getElementById("messages");
-                    const input = document.getElementById("msgInput");
-                    const sendBtn = document.getElementById("sendBtn");
-                    const chatButtons = document.querySelectorAll(".chatCat");
 
-                    chatBtn.onclick = () => { chatBox.style.display = "flex"; };
-                    closeBtn.onclick = () => { chatBox.style.display = "none"; };
+                    chatBtn.onclick = () => chatBox.style.display = "flex";
+                    closeBtn.onclick = () => chatBox.style.display = "none";
 
                     function addMsg(text, cls) {
                         const div = document.createElement("div");
@@ -33,55 +30,38 @@
                         messages.scrollTop = messages.scrollHeight;
                     }
 
-                    function botReply(category) {
-                        let reply = "Ich habe dich nicht verstanden. Frag nach Regeln, Links, News oder Support.";
-                        switch(category) {
-                        case "faq":
-                            reply = "❓ FAQ:\n- Serverbeitritt über FiveM oder Discord\n- Alter bis: 16 \n- Keine RP-Erfahrung nötig";
-                            break;
-                        case "regeln":
-                            reply = "📜 Regeln:\n- Kein RDM/VDM\n- Kein Meta-/Powergaming\n- Respektvoll sein\nAlle Regeln: /regeln";
-                            break;
-                        case "links":
-                            reply = "🔗 Links:\nDiscord: https://discord.gg/DEINLINK\nWebsite: https://deineseite.de\nRegeln: /regeln";
-                            break;
-                        case "news":
-                            reply = "📢 News:\n- Neues Update online\n- Neue Fraktionen\n- Bugfixes";
-                            break;
-                        case "support":
-                            reply = "📩 Support:\nBitte nutze den Support-Bereich auf der Website oder Discord #support";
-                            break;
+                    function botReply(cat) {
+                        let reply = "";
+
+                        if(cat === "faq") {
+                        reply = "❓ FAQ:\n• Alter bis: 16\n• Anfänger willkommen";
                         }
+                        else if(cat === "regeln") {
+                        reply = "📜 Regeln:\n• Kein RDM / VDM\n• Kein Meta- oder Powergaming\n• Respektvoll bleiben";
+                        }
+                        else if(cat === "links") {
+                        reply = "🔗 Links:\nDiscord: https://maelafk.github.io/VG-RP-Notruf-Hamburg/discord.html\nWebsite: https://maelafk.github.io/VG-RP-Notruf-Hamburg/\nServer code: https://maelafk.github.io/VG-RP-Notruf-Hamburg/code.html\nRegeln: https://maelafk.github.io/VG-RP-Notruf-Hamburg/regeln.html";
+                        }
+                        else if(cat === "news") {
+                        reply = "📢 News:\n• Neues Update online\n• Neue Fraktionen\n• Bugfixes";
+                        }
+                        else if(cat === "support") {
+                        reply = "📩 Support:\nBitte melde dich im Discord im #support.";
+                        }
+
                         addMsg(reply, "bot");
                     }
 
-                    function sendMessage() {
-                        const text = input.value.trim();
-                        if(!text) return;
-                        addMsg(text, "user");
-                        input.value = "";
-
-                        const t = text.toLowerCase();
-                        if(t.includes("hallo") || t.includes("hi")) botReply("faq");
-                        else if(t.includes("regel")) botReply("regeln");
-                        else if(t.includes("link") || t.includes("discord")) botReply("links");
-                        else if(t.includes("news") || t.includes("neu")) botReply("news");
-                        else if(t.includes("support") || t.includes("hilfe")) botReply("support");
-                        else botReply("unknown");
-                    }
-
-                    sendBtn.onclick = sendMessage;
-                    input.addEventListener("keydown", e => { if(e.key==="Enter") sendMessage(); });
-
-                    chatButtons.forEach(btn => {
-                        btn.addEventListener("click", () => {
+                    document.querySelectorAll(".chatCat").forEach(btn => {
+                        btn.onclick = () => {
                         addMsg(btn.innerText, "user");
                         botReply(btn.dataset.cat);
-                        });
+                        };
                     });
 
-                    addMsg("Hallo! Klicke auf 💬 unten rechts oder nutze die Buttons für FAQ, Regeln, Links, News oder Support.", "bot");
+                    addMsg("Willkommen! Wähle eine Kategorie 👇", "bot");
                     });
+
                 </script>
 
                        
@@ -118,7 +98,8 @@
 
                 <div id="chatBox">
                 <div id="chatHeader">
-                    NotrufBot <span id="closeBtn">✖</span>
+                    NotrufBot
+                    <span id="closeBtn">✖</span>
                 </div>
 
                 <div id="messages"></div>
@@ -130,12 +111,6 @@
                     <button class="chatCat" data-cat="news">📢 News</button>
                     <button class="chatCat" data-cat="support">📩 Support</button>
                 </div>
-
-                <div id="inputArea">
-                    <input id="msgInput" type="text" placeholder="Schreibe hier...">
-                    <button id="sendBtn">Senden</button>
                 </div>
-                </div>
-
             </body>
     </html>        
